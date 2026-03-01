@@ -1,4 +1,3 @@
-[CHARACTER_SHEET_PROJECT.md](https://github.com/user-attachments/files/25640852/CHARACTER_SHEET_PROJECT.md)
 # Character Sheet
 
 A companion tool for MyDailyEpic that transforms life history into D&D-style character attributes.
