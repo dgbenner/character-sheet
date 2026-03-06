@@ -3,7 +3,7 @@
 :root {
   --parchment: #FAF3E0;
   --parchment-dark: #F0E0B0;
-  --ink: #3D2B1F;
+  --ink: #2B1D12;
   --ink-light: #6B4C1E;
   --gold: #8B6914;
   --gold-light: #C9A84C;
@@ -15,17 +15,19 @@ body {
   font-family: Georgia, 'Times New Roman', serif;
 }
 
-/* Parchment texture via gradient */
+/* Parchment gradient vignette */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(139, 105, 20, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(139, 105, 20, 0.04) 0%, transparent 60%);
+    radial-gradient(ellipse at 20% 20%, rgba(139, 105, 20, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 105, 20, 0.05) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
+
+/* grain overlay is rendered as a DOM element in layout.tsx */
 
 /* Range input styling */
 input[type='range'] {

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import GrainOverlay from '../components/GrainOverlay'
 
 export const metadata: Metadata = {
   title: 'Character Sheet',
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <GrainOverlay />
+        {children}
+      </body>
     </html>
   )
 }

@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { CHARACTER_CLASSES, type CharacterClass } from '../lib/classes'
 
 type Props = {
   value: string | null
   onChange: (key: string) => void
+  onOpenDrawer: (cls: CharacterClass) => void
 }
 
 const STAT_COLORS: Record<string, string> = {
@@ -17,25 +17,22 @@ const STAT_COLORS: Record<string, string> = {
   CHA: '#D4AC0D',
 }
 
-export default function ClassPicker({ value, onChange }: Props) {
-  const [expanded, setExpanded] = useState<string | null>(null)
-
-  function handleSelect(key: string) {
-    onChange(key)
-    setExpanded(key)
+export default function ClassPicker({ value, onChange, onOpenDrawer }: Props) {
+  function handleSelect(cls: CharacterClass) {
+    onChange(cls.key)
+    onOpenDrawer(cls)
   }
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" style={{ gridAutoRows: '1fr' }}>
       {CHARACTER_CLASSES.map(cls => {
         const isSelected = value === cls.key
-        const isExpanded = expanded === cls.key
 
         return (
-          <div key={cls.key}>
+          <div key={cls.key} className="flex flex-col">
             <button
-              onClick={() => handleSelect(cls.key)}
-              className="w-full text-left rounded-lg border-2 px-3 py-2.5 transition-all"
+              onClick={() => handleSelect(cls)}
+              className="flex-1 w-full text-left rounded-lg border-2 px-3 py-2.5 transition-all flex flex-col"
               style={{
                 background: isSelected ? '#F0E0B0' : '#FAF3E0',
                 borderColor: isSelected ? '#3D2B1F' : '#C9A84C',
@@ -47,7 +44,7 @@ export default function ClassPicker({ value, onChange }: Props) {
               <div className="text-xs italic leading-tight mt-0.5 mb-1.5" style={{ color: '#6B4C1E' }}>
                 {cls.tagline}
               </div>
-              <div className="flex gap-1 flex-wrap">
+              <div className="flex gap-1 flex-wrap mt-auto">
                 {cls.primaryStats.map(stat => (
                   <span
                     key={stat}
@@ -63,21 +60,6 @@ export default function ClassPicker({ value, onChange }: Props) {
                 ))}
               </div>
             </button>
-
-            {isExpanded && (
-              <div
-                className="mt-1 rounded-lg border px-3 py-2 text-xs leading-relaxed"
-                style={{ background: '#FFF8EE', borderColor: '#C9A84C', color: '#3D2B1F' }}
-              >
-                <div className="font-semibold mb-1" style={{ color: '#8B6914' }}>
-                  {cls.realWorldTrait}
-                </div>
-                <p className="mb-1.5">{cls.description}</p>
-                <div className="italic text-xs" style={{ color: '#8B6914' }}>
-                  {cls.examples.join(' · ')}
-                </div>
-              </div>
-            )}
           </div>
         )
       })}
