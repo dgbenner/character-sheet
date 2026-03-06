@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --parchment: #FAF3E0;
+  --parchment-dark: #F0E0B0;
+  --ink: #3D2B1F;
+  --ink-light: #6B4C1E;
+  --gold: #8B6914;
+  --gold-light: #C9A84C;
+}
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* Parchment texture via gradient */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(139, 105, 20, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(139, 105, 20, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Range input styling */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: #C9A84C;
+  outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3D2B1F;
+  cursor: pointer;
+  border: 2px solid #8B6914;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3D2B1F;
+  cursor: pointer;
+  border: 2px solid #8B6914;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
